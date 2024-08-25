@@ -17,7 +17,8 @@ def Vicsek_modified(v_0,eta,r, N,L,iterations,alpha,beta):
         theta[0]=initial_theta
         
         #Creating the s
-        s=np.array([ np.random.choice([0,1],N ) for i in range(iterations)])
+        initial_s=np.random.choice([0,1],N )
+        s=np.array([ initial_s for i in range(iterations)])
         
 
         for iteration in range(iterations-1):
