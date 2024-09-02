@@ -116,9 +116,9 @@ def Vicsek_PD(v_0,r, N,L,iterations,b):
      )
      return Vicsek_payof(v_0,r, N,L,iterations,payof_matrix)
 
-def Vicsek_SD(v_0,r, N,L,iterations):
-     payof_matrix=np.array([ [1,1-r],
-                              [1+r,0]]
+def Vicsek_SD(v_0,r, N,L,iterations,b):
+     payof_matrix=np.array([ [1,1-b],
+                              [1+b,0]]
      )
      return Vicsek_payof(v_0,r, N,L,iterations,payof_matrix)
 
