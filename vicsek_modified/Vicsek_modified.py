@@ -34,7 +34,7 @@ def Vicsek_modified(v_0,eta,r, N,L,iterations,alpha,beta):
                 #updating the angles
  
                 tree = cKDTree(pos[iteration],boxsize=[L,L])     #Added workers beneath for parallel processing
-                negibors=tree.query_ball_point(pos[iteration],r ) 
+                negibors=tree.query_ball_point(pos[iteration],r,workers=-1 ) 
 
                #This is made using chat gpt
                 # Filter out the particle's own index from its neighbors list 
@@ -45,7 +45,8 @@ def Vicsek_modified(v_0,eta,r, N,L,iterations,alpha,beta):
                       negibor_indexes=negibors[particle_index]
                       #The angles of the neigbors
                       angles=theta[iteration][negibor_indexes]
-                      if s[iteration][particle_index]==1:
+                                                              #If there are no neigbors it behaves as defector
+                      if s[iteration][particle_index]==1 and len(negibor_indexes)!=0:
                              angle_average=np.angle(  sum(np.exp(angles*1j) )    )
                             # theta[iteration+1][particle_index]=angle_average+eta*np.random.uniform(-np.pi,np.pi)
                              theta[iteration+1][particle_index]=angle_average+np.random.uniform(-eta,eta)
